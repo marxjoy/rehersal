@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'rehersal_room.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres_admin',
-        'PASSWORD': 'dupaDUPA100',
-        'HOST': 'database-1.c8wukylp0snd.eu-central-1.rds.amazonaws.com',
+        'NAME': os.environ.get("SQL_DATABASE"),
+        'USER': os.environ.get("SQL_USER"),
+        'PASSWORD': os.environ.get("SQL_PASSWORD"),
+        'HOST': os.environ.get("SQL_HOST"),
         'PORT': '5432',
     }
 }
