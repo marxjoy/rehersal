@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+ <h1 class='text-center'>Calendar</h1>
+
+<ul class="nav justify-content-center">
+  <li class="nav-item ">
+   <a class="nav-link" href="{% url 'reservation:event-list' 0 %}">THIS WEEK</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'reservation:event-list' week|add:1 %}">NEXT WEEK</a>
+  </li>
+</ul>
+
+<div class="table-responsive">
+<table class="table table-bordered table table-striped">
+  <thead>
+  	<tr>
+{% for day in WEEKDAYS %}
+ 		<th style="width:14%" class='text-center bg-light'>{{ day }}</th>
+{% endfor %}
+	</tr>
+ </thead>
+  <tbody>
+  	 <tr>
+	{% for day in WEEKDAYS %}
+	<th style="width:14%">
+	{% for event in object_list %}
+{% if day == event.date|date:"l" %}
+
+<div class="card bg-light mb-3" style="max-width: 13rem;">
+  <div class="card-header"><p>{{ event.title }}</p><h5><strong>{{ event.start_time|date:"G:i" }} - {{ event.end_time|date:"G:i"  }}</strong></h5></div>
+  <div class="card-body bg-dark text-white">
+  	<h5 class="card-title">DATA: <strong>{{ event.date|date:"d.m.Y"  }}</strong></h5>
+    <p class="card-title">KTO: <strong>{{ event.author }}</strong></p>
+    {% if event.description %}
+     <cite title="Source Title">{{ event.description }}</cite>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+	{% endfor %}
+	</th>
+	{% endfor %}
+	</tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
