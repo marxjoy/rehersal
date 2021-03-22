@@ -32,7 +32,7 @@ urlpatterns = [
 	path('', EventListView.as_view(), name='event-list'),
 	path('<int:week>/', EventListView.as_view(), name='event-list'),
 	path('create/', EventCreate.as_view(), name='event-create'),
-	path('delete/<int:id>/', EventDelete.as_view(), name='event-delete'),
+	path('delete/<pk>/', EventDelete.as_view(), name='event-delete'),
 	#path('accounts/', include('django.contrib.auth.urls')),
       #  path('', include(router.urls))
 ]

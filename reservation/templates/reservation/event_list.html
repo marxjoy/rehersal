@@ -30,14 +30,25 @@
 	{% for event in object_list %}
 {% if day == event.date|date:"l" %}
 
-<div class="card bg-light mb-3" style="max-width: 13rem;">
-  <div class="card-header"><p>{{ event.title }}</p><h5><strong>{{ event.start_time|date:"G:i" }} - {{ event.end_time|date:"G:i"  }}</strong></h5></div>
+<div class="card bg-light mb-3  " style="max-width: 13rem;">
+  <div class="card-header">
+    <h6 class="card-title"><strong>{{ event.title }}</strong></h6>
+    <h6><strong>{{ event.start_time|date:"G:i" }} - {{ event.end_time|date:"G:i"  }}</strong></h6></div>
   <div class="card-body bg-dark text-white">
-  	<h5 class="card-title">DATA: <strong>{{ event.date|date:"d.m.Y"  }}</strong></h5>
-    <p class="card-title">KTO: <strong>{{ event.author }}</strong></p>
+    
+  	<h5 class="card-title">DATA: {{ event.date|date:"d.m.Y"  }}</h5>
     {% if event.description %}
      <cite title="Source Title">{{ event.description }}</cite>
     {% endif %}
+    <p class="mt-3">
+      <footer class="blockquote-footer">{{ event.author }}</footer>
+    </p>
+     {% if user.is_authenticated %}
+      {% if user == event.author %}
+     <a class="btn btn-danger" href="{% url 'reservation:event-delete' event.pk %}">ODWOŁAJ</a>
+      {% endif %}
+     {% endif %}
+
   </div>
 </div>
 {% endif %}

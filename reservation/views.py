@@ -66,6 +66,13 @@ class EventCreate(LoginRequiredMixin, CreateView):
 
 
 
-class EventDelete(DeleteView):
+class EventDelete(LoginRequiredMixin, DeleteView):
     model = Event
-    success_url = reverse_lazy('event-list')
+    success_url = reverse_lazy('reservation:event-list')
+
+    def dispatch(self, request, *args, **kwargs):
+    	event=self.get_object()
+    	if not request.user == event.author:
+    		raise Exception('PERMISSION ERROR')
+    	return super().dispatch(request, *args, **kwargs)
+
