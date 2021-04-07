@@ -1,9 +1,9 @@
-from django.forms import ModelForm
+import datetime as dt
+
 from django.core.exceptions import ValidationError
+from django.forms import ModelForm
 
 from .models import Event
-
-import datetime as dt
 
 
 class EventCreateForm(ModelForm):
@@ -32,16 +32,8 @@ class EventCreateForm(ModelForm):
 			if start_time >= end_time:
 				msg = "Start time nie może być większy niż End time"
 				self.add_error('start_time', msg)
-
-
-			
-			print(date)
+		
 			same_day_events = Event.objects.filter(date=date).filter(start_time__gte=start_time).filter(end_time__lte=end_time)
-			print(same_day_events)
 			if same_day_events:
 				msg = "Jest już zajęte"
 				self.add_error('date', msg)
-
-
-
-

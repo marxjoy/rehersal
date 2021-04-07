@@ -36,7 +36,7 @@
     <h6><strong>{{ event.start_time|date:"G:i" }} - {{ event.end_time|date:"G:i"  }}</strong></h6></div>
   <div class="card-body bg-dark text-white">
     
-  	<h5 class="card-title">DATA: {{ event.date|date:"d.m.Y"  }}</h5>
+  	<h5 class="card-title"> {{ event.date|date:"d.m.Y"  }}</h5>
     {% if event.description %}
      <cite title="Source Title">{{ event.description }}</cite>
     {% endif %}

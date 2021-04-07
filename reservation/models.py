@@ -26,5 +26,3 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return f"{self.author} commented {self.event} at {self.created_at.strftime('%Y-%m-%d %H:%M')}"
-
-
